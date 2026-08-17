@@ -29,3 +29,39 @@ def test_ask_python():
     assert response.status_code == 200
     assert "question" in response.json()
     assert "answer" in response.json()
+def test_ask_python():
+    response = client.post(
+        "/ask",
+        json={
+            "question": "What is Python?",
+            "role": "student",
+            "student_name": "Rakshita",
+            "requested_student": "Rakshita"
+        }
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+
+    assert data["question"] == "What is Python?"
+    assert data["role"] == "student"
+    assert "Python" in data["answer"]
+
+
+def test_ask_iot():
+    response = client.post(
+        "/ask",
+        json={
+            "question": "What is IoT?",
+            "role": "student",
+            "student_name": "Rakshita",
+            "requested_student": "Rakshita"
+        }
+    )
+
+    assert response.status_code == 200
+    data = response.json()
+
+    assert data["question"] == "What is IoT?"
+    assert data["role"] == "student"
+    assert "IoT" in data["answer"]
